@@ -11,6 +11,8 @@ class Hilo:
             comentarios.append(Comentario(_comentario))
         self.comentarios = comentarios
 
+    def getTitulo(self):
+        return self.titulo_hilo
 
     def getComentarios(self):
         return self.comentarios
