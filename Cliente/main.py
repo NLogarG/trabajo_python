@@ -15,21 +15,27 @@ def menu():
             user = input("Usuario: ")
             passs = input("Contraseña: ")
             token = utils.getToken(user, passs)
-            if token != False:
+            if token != False:                
                 no_menu2 = True
                 while no_menu2:
                     print("Bienvenido " + utils.getName(token))
+                    maxima = 2
                     print("[1] Ver hilos")
-                    print("[2] Nuevo hilo")
+                    if user != "Anonimo":
+                        print("[2] Nuevo hilo")
+                        maxima = 3
+                        if user == "Admin":
+                            print("[3] Borrar hilo")
+                            maxima = 4
                     print("[0] Salir")
-                    opcion = utils.getNumber(3)
+                    opcion = utils.getNumber(maxima)
                     if opcion == 1:
                         print("Hilos...")
                     elif opcion == 2:
                         print("Creando hilo...")
                     else:
                         no_menu2 = False
-            else:
+            else:            
                 print("Usuario/Contraseña Incorrectos")
         elif opcion == 2:
             no_pass = True
