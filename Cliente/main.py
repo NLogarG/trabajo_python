@@ -20,8 +20,15 @@ def menu():
             else:
                 print("Usuario/Contraseña Incorrectos")
         elif opcion == 2:
+            no_pass = True
             user = input("Usuario: ")
-            passs = input("Contraseña: ")
+            while no_pass:
+                passs = input("Contraseña: ")
+                repass = input("Introduzca de nuevo la contraseña: ") 
+                if passs == repass:
+                    no_pass = False
+                else:
+                    print("Las contraseñas no coinciden")
             name = input("Nombre: ")
             utils.Logon(user,passs,name)
         elif opcion == 3:
