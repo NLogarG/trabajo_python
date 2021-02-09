@@ -22,7 +22,7 @@ def menu():
                     maxima = 2
                     print("[1] Ver hilos")
                     if user != "Anonimo":
-                        print("[2] Nuevo hilo")
+                        print("[2] Nuevo hilo")                        
                         maxima = 3
                         if user == "Admin":
                             print("[3] Borrar hilo")
@@ -33,7 +33,9 @@ def menu():
                         print("Hilos...")
                         utils.getHilos(token)
                     elif opcion == 2:
-                        print("Creando hilo...")
+                        autor_hilo = input("Autor del hilo: ")
+                        titulo_hilo = input("Nombre del hilo: ")
+                        utils.setHilo(autor_hilo,titulo_hilo)
                     else:
                         no_menu2 = False
             else:            
