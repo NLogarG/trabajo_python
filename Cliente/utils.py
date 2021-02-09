@@ -58,27 +58,30 @@ def Logon(user, passs, name):
     else:
         print("Fallo al crear Usuario")
 
-def getHilos(token):
+def getHilos():
     hilos = []
+    response = requests.get('http://127.0.0.1:5000/hilos')
+    print(response.status_code)
+    print(str(response.json()))
+    if response.status_code == 200:
+        hilos = response.json()
+        titulos_hilo = str(hilos['RESULTADO'])
+        orden = 101
+        for hilo in titulos_hilo.split(','):
+            print("["+str(orden)+"] "+hilo)
+            orden +=1
+
+def setHilo(autor_hilo,titulo_hilo,token):
     header = {
         'Content-Type': 'application/json',
         'Authorization': token,
     }
-    response = requests.get('http://127.0.0.1:5000/hilos', headers=header)
-    if response.status_code == 200:
-        hilos = response.json()
-        orden = 101
-        for hilo in hilos:
-            print("["+orden+"] "+hilo.getTitulo)
-            orden +=1
-
-def setHilo(autor_hilo,titulo_hilo):
     datos_hilo = {
         'autor_hilo': autor_hilo,
-        'titulo_hilo': autor_hilo,     
+        'titulo_hilo': titulo_hilo,     
         'comentarios': ""
     }
-    response = requests.post('http://127.0.0.1:5000/hilos', json=datos_hilo)
+    response = requests.post('http://127.0.0.1:5000/hilos', json=datos_hilo,headers=header)
     if response.status_code == 200:
         print("Hilo registrado")
     else:

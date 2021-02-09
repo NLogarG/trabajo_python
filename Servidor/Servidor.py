@@ -4,6 +4,7 @@ import jwt
 import time
 from Modelos.Usuarios import User
 from Modelos.Hilos import Hilo
+from Modelos.Comentarios import Comentario
 from pymongo import MongoClient
 from datetime import datetime, timedelta
 from functools import wraps
@@ -86,10 +87,26 @@ def datos_name(user, nombre):
     return jsonify({'datos': nombre}), 200
 
 @application.route('/hilos', methods=['GET'])
-@auth_required
-def datos_hilos(hilos):
-    return jsonify({'hilos': hilos}), 200
+def datos_hilos():
+    titulos = ""
+    for hilo in hilos:
+        titulos += hilo.getTitulo() + ","
+    return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
 
+@application.route('/hilos', methods=['POST'])
+@auth_required
+def setHilo(user):
+    isTitulo = 'titulo_hilo' in request.json
+    isAutor = 'autor_hilo' in request.json
+    if isTitulo and isAutor:
+        db.hilos.insert_one({
+            "titulo_hilo": request.json['titulo_hilo'],
+            "autor_hilo": request.json['autor_hilo'],
+            "comentarios": request.json['comentarios']
+        })
+        getAllHilos(db)
+        return jsonify({'RESULTADO': 'Registro completo'}), 200
+    return jsonify({'RESULTADO': 'Faltan datos'}), 400
 
 @application.errorhandler(401)
 def unauthorized(e):
@@ -97,12 +114,14 @@ def unauthorized(e):
 
 def getAllHilos(db):
     _hilos=[]
+    hilos.clear()
     _hilos = db.hilos.find()
     for _hilo in _hilos:
         hilos.append(Hilo(_hilo))
 
 def getAllUsers(db):
     _users = []
+    users.clear()
     _users = db.usuarios.find()
     for _user in _users:
         users.append(User(_user))

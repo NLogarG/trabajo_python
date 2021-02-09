@@ -24,18 +24,17 @@ def menu():
                     if user != "Anonimo":
                         print("[2] Nuevo hilo")                        
                         maxima = 3
-                        if user == "Admin":
+                        if utils.getName(token) == "dios":
                             print("[3] Borrar hilo")
                             maxima = 4
                     print("[0] Salir")
                     opcion = utils.getNumber(maxima)
                     if opcion == 1:
-                        print("Hilos...")
-                        utils.getHilos(token)
+                        utils.getHilos()
                     elif opcion == 2:
                         autor_hilo = input("Autor del hilo: ")
                         titulo_hilo = input("Nombre del hilo: ")
-                        utils.setHilo(autor_hilo,titulo_hilo)
+                        utils.setHilo(autor_hilo,titulo_hilo,token)
                     else:
                         no_menu2 = False
             else:            
