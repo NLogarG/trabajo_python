@@ -4,6 +4,7 @@ class Hilo:
     def __init__ (self,datos_hilo):
         comentarios = []
         _comentarios = []
+        self.autor_hilo = datos_hilo["autor_hilo"]
         self.titulo_hilo = datos_hilo["titulo_hilo"]
         _comentarios = datos_hilo["comentarios_hilo"]
         for _comentario in _comentarios:

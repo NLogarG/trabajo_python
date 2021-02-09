@@ -16,7 +16,9 @@ def menu():
             token = utils.getToken(user, passs)
             if token != False:
                 print("Bienvenido " + utils.getName(token))
-                no_menu = False
+                print("[1] Ver hilos")
+                print("[2] Nuevo hilo")
+                print("[0] Salir")                
             else:
                 print("Usuario/Contraseña Incorrectos")
         elif opcion == 2:
