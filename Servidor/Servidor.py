@@ -15,6 +15,7 @@ client = MongoClient(
 db = client.proyecto
 
 users = []
+hilos = []
 
 def auth_required(f):
     @wraps(f)
@@ -83,11 +84,18 @@ def datos(user):
 def datos_name(user, nombre):
     return jsonify({'Hola': nombre}), 200
 
+@application.route('/hilos', methods=['GET'])
+@auth_required
+def datos_hilos(hilos):
+    return jsonify({'hilos': get}), 200
+
 
 @application.errorhandler(401)
 def unauthorized(e):
     return jsonify({'Error': 'No estás autenticado'}), 401
 
+def getAllHilos(db):
+    _hilos=[]
 
 def getAllUsers(db):
     _users = []

@@ -2,6 +2,7 @@ import utils
 
 token = False
 
+
 def menu():
     no_menu = True
     while no_menu:
@@ -15,10 +16,19 @@ def menu():
             passs = input("Contraseña: ")
             token = utils.getToken(user, passs)
             if token != False:
-                print("Bienvenido " + utils.getName(token))
-                print("[1] Ver hilos")
-                print("[2] Nuevo hilo")
-                print("[0] Salir")                
+                no_menu2 = True
+                while no_menu2:
+                    print("Bienvenido " + utils.getName(token))
+                    print("[1] Ver hilos")
+                    print("[2] Nuevo hilo")
+                    print("[0] Salir")
+                    opcion = utils.getNumber(3)
+                    if opcion == 1:
+                        print("Hilos...")
+                    elif opcion == 2:
+                        print("Creando hilo...")
+                    else:
+                        no_menu2 = False
             else:
                 print("Usuario/Contraseña Incorrectos")
         elif opcion == 2:
@@ -26,13 +36,13 @@ def menu():
             user = input("Usuario: ")
             while no_pass:
                 passs = input("Contraseña: ")
-                repass = input("Introduzca de nuevo la contraseña: ") 
+                repass = input("Introduzca de nuevo la contraseña: ")
                 if passs == repass:
                     no_pass = False
                 else:
                     print("Las contraseñas no coinciden")
             name = input("Nombre: ")
-            utils.Logon(user,passs,name)
+            utils.Logon(user, passs, name)
         elif opcion == 3:
             print("Mostrar hilos")
         elif opcion == 0:
