@@ -16,7 +16,6 @@ def getNumber(max):
             print("Selecciona opcion valida.")
     return opcion
 
-
 def getToken(user, passs):
     respuesta = []
     datos_user = {
@@ -59,6 +58,8 @@ def Logon(user, passs, name):
     else:
         print("Fallo al crear Usuario")
 
+def getHilos(token):
+    return 0
 
 def encriptar(plain_text):
     encriptado = ""

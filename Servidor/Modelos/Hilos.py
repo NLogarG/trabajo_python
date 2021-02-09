@@ -12,4 +12,6 @@ class Hilo:
         self.comentarios = comentarios
 
 
+    def getComentarios(self):
+        return self.comentarios
 

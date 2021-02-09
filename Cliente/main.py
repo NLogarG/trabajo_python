@@ -31,6 +31,7 @@ def menu():
                     opcion = utils.getNumber(maxima)
                     if opcion == 1:
                         print("Hilos...")
+                        utils.getHilos(token)
                     elif opcion == 2:
                         print("Creando hilo...")
                     else:

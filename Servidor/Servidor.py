@@ -3,6 +3,7 @@ import json
 import jwt
 import time
 from Modelos.Usuarios import User
+from Modelos.Hilos import Hilo
 from pymongo import MongoClient
 from datetime import datetime, timedelta
 from functools import wraps
@@ -82,12 +83,12 @@ def datos(user):
 @application.route('/datos/<nombre>', methods=['GET'])
 @auth_required
 def datos_name(user, nombre):
-    return jsonify({'Hola': nombre}), 200
+    return jsonify({'datos': nombre}), 200
 
 @application.route('/hilos', methods=['GET'])
 @auth_required
 def datos_hilos(hilos):
-    return jsonify({'hilos': get}), 200
+    return jsonify({'hilos': hilos}), 200
 
 
 @application.errorhandler(401)
@@ -96,6 +97,9 @@ def unauthorized(e):
 
 def getAllHilos(db):
     _hilos=[]
+    _hilos = db.hilos.find()
+    for _hilo in _hilos:
+        hilos.append(Hilo(_hilo))
 
 def getAllUsers(db):
     _users = []
@@ -119,6 +123,7 @@ def getUserName(users,username):
 
 if __name__ == '__main__':
     getAllUsers(db)
+    getAllHilos(db)
     application.run(debug=True)
 
 
