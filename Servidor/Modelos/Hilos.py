@@ -1,6 +1,6 @@
 class Hilo:
 
-    def __init__ (self,datos_hilo):
+    def __init__(self, datos_hilo):
         comentarios = []
         _comentarios = []
         self.autor_hilo = datos_hilo["autor_hilo"]
@@ -15,4 +15,3 @@ class Hilo:
 
     def getComentarios(self):
         return self.comentarios
-

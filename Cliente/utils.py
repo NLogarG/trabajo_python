@@ -60,7 +60,7 @@ def Logon(user, passs, name):
 
 def getHilos():
     hilos = []
-    response = requests.get('http://127.0.0.1:5000/hilos')
+    response = requests.get('http://127.0.0.1:5000/hilo')
     print(response.status_code)
     print(str(response.json()))
     if response.status_code == 200:
@@ -77,8 +77,8 @@ def setHilo(autor_hilo,titulo_hilo,token):
         'Authorization': token,
     }
     datos_hilo = {
-        'autor_hilo': autor_hilo,
-        'titulo_hilo': titulo_hilo,     
+        'titulo_hilo': titulo_hilo,  
+        'autor_hilo': autor_hilo,   
         'comentarios': ""
     }
     response = requests.post('http://127.0.0.1:5000/hilos', json=datos_hilo,headers=header)
@@ -86,6 +86,20 @@ def setHilo(autor_hilo,titulo_hilo,token):
         print("Hilo registrado")
     else:
         print("Fallo al crear Hilo")
+
+def deleteHilo(titulo_hilo, token):
+    header = {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+    }
+    datos_hilo = {
+        'titulo_hilo': titulo_hilo,
+    }
+    response = requests.delete('http://127.0.0.1:5000/hilo', json=datos_hilo,headers=header)
+    if response.status_code == 200:
+        print("Hilo borrado")
+    else:
+        print("Fallo al borrar Hilo")
 
 def encriptar(plain_text):
     encriptado = ""

@@ -93,7 +93,14 @@ def datos_hilos():
         titulos += hilo.getTitulo() + ","
     return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
 
-@application.route('/hilos', methods=['POST'])
+@application.route('/hilo/<Titulo>', methods=['GET'])
+def datos_hilo():
+    titulos = ""
+    for hilo in hilos:
+        titulos += hilo.getTitulo() + ","
+    return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
+
+@application.route('/hilo', methods=['POST'])
 @auth_required
 def setHilo(user):
     isTitulo = 'titulo_hilo' in request.json
@@ -103,6 +110,19 @@ def setHilo(user):
             "titulo_hilo": request.json['titulo_hilo'],
             "autor_hilo": request.json['autor_hilo'],
             "comentarios": request.json['comentarios']
+        })
+        getAllHilos(db)
+        return jsonify({'RESULTADO': 'Registro completo'}), 200
+    return jsonify({'RESULTADO': 'Faltan datos'}), 400
+
+
+@application.route('/hilo', methods=['DELETE'])
+@auth_required
+def deleteHilo(user):
+    isTitulo = 'titulo_hilo' in request.json
+    if isTitulo:
+        db.hilos.delete_one({
+            "titulo_hilo": request.json['titulo_hilo']
         })
         getAllHilos(db)
         return jsonify({'RESULTADO': 'Registro completo'}), 200
