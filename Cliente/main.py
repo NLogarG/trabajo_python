@@ -43,6 +43,9 @@ def menu():
                         no_menu2 = False
             else:            
                 print("Usuario/Contraseña Incorrectos")
+        
+        
+        
         elif opcion == 2:
             no_pass = True
             user = input("Usuario: ")
@@ -55,8 +58,30 @@ def menu():
                     print("Las contraseñas no coinciden")
             name = input("Nombre: ")
             utils.Logon(user, passs, name)
+        
+        
+        
+        
         elif opcion == 3:
+            print("Registrandose como ANONIMO")
             utils.getHilos()
+                no_menu3 = True:
+                while no_menu3
+                    print("[1] Ver el hilo")
+                    print("[0] Salir")
+                    opcion = utils.getNumber(2)
+                    if opcion == 1:
+                        print("Introduzca el ID del hilo: ")                        
+                    elif opcion == 0:
+                        print("Saliendo al menu principal...")
+                        no_menu3 = False
+
+
+
+
+
+
+
         elif opcion == 0:
             print("Saliendo...")
             no_menu = False
