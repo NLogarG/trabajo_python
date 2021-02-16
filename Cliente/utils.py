@@ -16,7 +16,6 @@ def getNumber(max):
             print("Selecciona opcion valida.")
     return opcion
 
-
 def getToken(user, passs):
     respuesta = []
     datos_user = {
@@ -50,7 +49,7 @@ def getName(token):
 def Logon(user, passs, name):
     datos_user = {
         'usuario': user,
-        'password': encriptar(passs),
+        'password': encriptar(passs),     
         'name': name
     }
     response = requests.post('http://127.0.0.1:5000/logon', json=datos_user)
@@ -59,6 +58,46 @@ def Logon(user, passs, name):
     else:
         print("Fallo al crear Usuario")
 
+def getHilos():
+    hilos = []
+    response = requests.get('http://127.0.0.1:5000/hilo')
+    if response.status_code == 200:
+        hilos = response.json()
+        titulos_hilo = str(hilos['RESULTADO'])
+        orden = 101
+        for hilo in titulos_hilo.split(','):
+            print("["+str(orden)+"] "+hilo)
+            orden +=1
+
+def setHilo(autor_hilo,titulo_hilo,token):
+    header = {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+    }
+    datos_hilo = {
+        'titulo_hilo': titulo_hilo,  
+        'autor_hilo': autor_hilo,   
+        'comentarios': ""
+    }
+    response = requests.post('http://127.0.0.1:5000/hilos', json=datos_hilo,headers=header)
+    if response.status_code == 200:
+        print("Hilo registrado")
+    else:
+        print("Fallo al crear Hilo")
+
+def deleteHilo(titulo_hilo, token):
+    header = {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+    }
+    datos_hilo = {
+        'titulo_hilo': titulo_hilo,
+    }
+    response = requests.delete('http://127.0.0.1:5000/hilo', json=datos_hilo,headers=header)
+    if response.status_code == 200:
+        print("Hilo borrado")
+    else:
+        print("Fallo al borrar Hilo")
 
 def encriptar(plain_text):
     encriptado = ""

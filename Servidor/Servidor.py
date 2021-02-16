@@ -3,6 +3,8 @@ import json
 import jwt
 import time
 from Modelos.Usuarios import User
+from Modelos.Hilos import Hilo
+from Modelos.Comentarios import Comentario
 from pymongo import MongoClient
 from datetime import datetime, timedelta
 from functools import wraps
@@ -15,6 +17,7 @@ client = MongoClient(
 db = client.proyecto
 
 users = []
+hilos = []
 
 def auth_required(f):
     @wraps(f)
@@ -81,16 +84,64 @@ def datos(user):
 @application.route('/datos/<nombre>', methods=['GET'])
 @auth_required
 def datos_name(user, nombre):
-    return jsonify({'Hola': nombre}), 200
+    return jsonify({'datos': nombre}), 200
 
+@application.route('/hilos', methods=['GET'])
+def datos_hilos():
+    titulos = ""
+    for hilo in hilos:
+        titulos += hilo.getTitulo() + ","
+    return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
+
+@application.route('/hilo/<Titulo>', methods=['GET'])
+def datos_hilo():
+    titulos = ""
+    for hilo in hilos:
+        titulos += hilo.getTitulo() + ","
+    return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
+
+@application.route('/hilo', methods=['POST'])
+@auth_required
+def setHilo(user):
+    isTitulo = 'titulo_hilo' in request.json
+    isAutor = 'autor_hilo' in request.json
+    if isTitulo and isAutor:
+        db.hilos.insert_one({
+            "titulo_hilo": request.json['titulo_hilo'],
+            "autor_hilo": request.json['autor_hilo'],
+            "comentarios": request.json['comentarios']
+        })
+        getAllHilos(db)
+        return jsonify({'RESULTADO': 'Registro completo'}), 200
+    return jsonify({'RESULTADO': 'Faltan datos'}), 400
+
+
+@application.route('/hilo', methods=['DELETE'])
+@auth_required
+def deleteHilo(user):
+    isTitulo = 'titulo_hilo' in request.json
+    if isTitulo:
+        db.hilos.delete_one({
+            "titulo_hilo": request.json['titulo_hilo']
+        })
+        getAllHilos(db)
+        return jsonify({'RESULTADO': 'Registro completo'}), 200
+    return jsonify({'RESULTADO': 'Faltan datos'}), 400
 
 @application.errorhandler(401)
 def unauthorized(e):
     return jsonify({'Error': 'No estás autenticado'}), 401
 
+def getAllHilos(db):
+    _hilos=[]
+    hilos.clear()
+    _hilos = db.hilos.find()
+    for _hilo in _hilos:
+        hilos.append(Hilo(_hilo))
 
 def getAllUsers(db):
     _users = []
+    users.clear()
     _users = db.usuarios.find()
     for _user in _users:
         users.append(User(_user))
@@ -111,6 +162,7 @@ def getUserName(users,username):
 
 if __name__ == '__main__':
     getAllUsers(db)
+    getAllHilos(db)
     application.run(debug=True)
 
 
