@@ -10,7 +10,7 @@ def menu():
         print("[2] Crear Cuenta")
         print("[3] Ver hilos")
         print("[0] Salir")
-        opcion = utils.getNumber(4)
+        opcion = utils.getNumber(0,4,"Opción: ")
         if opcion == 1:
             user = input("Usuario: ")
             passs = input("Contraseña: ")
@@ -29,15 +29,15 @@ def menu():
                             print("[3] Borrar hilo")
                             maxima = 4
                     print("[0] Salir")
-                    opcion = utils.getNumber(maxima)
+                    opcion = utils.getNumber(0,maxima,"Opción: ")
                     if opcion == 1:
                         utils.getHilos()
-                        print ("MENU HILOS")
                     elif opcion == 2:
                         titulo_hilo = input("Nombre del hilo: ")
                         utils.setHilo(name,titulo_hilo,token)
                     elif opcion ==3:
-                        id_hilo = input("ID Hilo")
+                        utils.getHilos()
+                        id_hilo = utils.getNumber(101,-1,"ID Hilo: ")
                         utils.deleteHilo(id_hilo,token)
                     else:
                         no_menu2 = False
@@ -65,16 +65,16 @@ def menu():
         elif opcion == 3:
             print("Registrandose como ANONIMO")
             utils.getHilos()
-                no_menu3 = True:
-                while no_menu3
-                    print("[1] Ver el hilo")
-                    print("[0] Salir")
-                    opcion = utils.getNumber(2)
-                    if opcion == 1:
-                        print("Introduzca el ID del hilo: ")                        
-                    elif opcion == 0:
-                        print("Saliendo al menu principal...")
-                        no_menu3 = False
+            no_menu3 = True
+            while no_menu3:
+                print("[1] Ver el hilo")
+                print("[0] Salir")
+                opcion = utils.getNumber(0,2,"Opción: ")
+                if opcion == 1:
+                    print("Introduzca el ID del hilo: ")                        
+                elif opcion == 0:
+                    print("Saliendo al menu principal...")
+                    no_menu3 = False
 
 
 
