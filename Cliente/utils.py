@@ -5,9 +5,6 @@ hilos = []
 cuenta_hilos = 0
 
 def getNumber(min,max,texto):
-    print(cuenta_hilos)
-    if max == -1:
-        max= cuenta_hilos
     numeros_bien = True
     opcion = 0
     while numeros_bien:

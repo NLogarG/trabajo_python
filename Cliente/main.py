@@ -31,13 +31,19 @@ def menu():
                     print("[0] Salir")
                     opcion = utils.getNumber(0,maxima,"Opción: ")
                     if opcion == 1:
-                        utils.getHilos()
+                        no_menu21 = True
+                        while no_menu21:
+                            utils.getHilos()
+                            print("[0] Volver")
+                            opcion = utils.getNumber(0,utils.cuenta_hilos,"ID Hilo: ")
+                            if opcion == 0 :
+                                no_menu21 = False
                     elif opcion == 2:
                         titulo_hilo = input("Nombre del hilo: ")
                         utils.setHilo(name,titulo_hilo,token)
                     elif opcion ==3:
                         utils.getHilos()
-                        id_hilo = utils.getNumber(101,-1,"ID Hilo: ")
+                        id_hilo = utils.getNumber(101,utils.cuenta_hilos,"ID Hilo: ")
                         utils.deleteHilo(id_hilo,token)
                     else:
                         no_menu2 = False
@@ -67,9 +73,8 @@ def menu():
             utils.getHilos()
             no_menu3 = True
             while no_menu3:
-                print("[1] Ver el hilo")
                 print("[0] Salir")
-                opcion = utils.getNumber(0,2,"Opción: ")
+                opcion = utils.getNumber(0,utils.cuenta_hilos,"ID Hilo: ")
                 if opcion == 1:
                     print("Introduzca el ID del hilo: ")                        
                 elif opcion == 0:
