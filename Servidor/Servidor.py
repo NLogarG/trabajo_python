@@ -99,6 +99,13 @@ def datos_hilo():
         titulos += hilo.getTitulo() + ","
     return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
 
+@application.route('/hilo/<Titulo>', methods=['POST'])
+def setComentarioHilo():
+    titulos = ""
+    for hilo in hilos:
+        titulos += hilo.getTitulo() + ","
+    return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
+
 @application.route('/hilo', methods=['POST'])
 @auth_required
 def setHilo(user):

@@ -36,7 +36,9 @@ def menu():
                             utils.getHilos()
                             print("[0] Volver")
                             opcion = utils.getNumber(0,utils.cuenta_hilos,"ID Hilo: ")
-                            if opcion == 0 :
+                            if opcion >= 101 and opcion < utils.cuenta_hilos:
+                                 
+                            elif opcion == 0 :
                                 no_menu21 = False
                     elif opcion == 2:
                         titulo_hilo = input("Nombre del hilo: ")
