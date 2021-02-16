@@ -82,14 +82,13 @@ def setHilo(autor_hilo,titulo_hilo,token):
     }
     datos_hilo = {
         'titulo_hilo': titulo_hilo,  
-        'autor_hilo': autor_hilo,   
-        'comentarios': ""
+        'autor_hilo': autor_hilo
     }
     response = requests.post('http://127.0.0.1:5000/hilo', json=datos_hilo,headers=header)
     if response.status_code == 200:
         print("Hilo registrado")
     else:
-        print("Fallo al crear Hilo")
+        print("Fallo al crear hilo")
 
 def deleteHilo(id_hilo, token):
     header = {

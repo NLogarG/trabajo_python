@@ -4,13 +4,12 @@ import jwt
 import time
 from Modelos.Usuarios import User
 from Modelos.Hilos import Hilo
-from Modelos.Comentarios import Comentario
 from pymongo import MongoClient
 from datetime import datetime, timedelta
 from functools import wraps
 application = Flask(__name__)
 
-TOKEN_KEY = "top secret"
+TOKEN_KEY = "copa"
 
 client = MongoClient(
     'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false')
@@ -108,8 +107,7 @@ def setHilo(user):
     if isTitulo and isAutor:
         db.hilos.insert_one({
             "titulo_hilo": request.json['titulo_hilo'],
-            "autor_hilo": request.json['autor_hilo'],
-            "comentarios": request.json['comentarios']
+            "autor_hilo": request.json['autor_hilo']
         })
         getAllHilos(db)
         return jsonify({'RESULTADO': 'Registro completo'}), 200
