@@ -61,8 +61,6 @@ def Logon(user, passs, name):
 def getHilos():
     hilos = []
     response = requests.get('http://127.0.0.1:5000/hilo')
-    print(response.status_code)
-    print(str(response.json()))
     if response.status_code == 200:
         hilos = response.json()
         titulos_hilo = str(hilos['RESULTADO'])

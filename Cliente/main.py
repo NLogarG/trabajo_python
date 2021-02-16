@@ -37,7 +37,6 @@ def menu():
                         titulo_hilo = input("Nombre del hilo: ")
                         utils.setHilo(name,titulo_hilo,token)
                     elif opcion ==3:
-                        
                         id_hilo = input("ID Hilo")
                         utils.deleteHilo(id_hilo,token)
                     else:
@@ -57,7 +56,7 @@ def menu():
             name = input("Nombre: ")
             utils.Logon(user, passs, name)
         elif opcion == 3:
-            print("Mostrar hilos")
+            utils.getHilos()
         elif opcion == 0:
             print("Saliendo...")
             no_menu = False
