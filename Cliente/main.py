@@ -37,16 +37,22 @@ def menu():
                             print("[0] Volver")
                             opcion = utils.getNumber(0,utils.cuenta_hilos,"ID Hilo: ")
                             if opcion >= 101 and opcion < utils.cuenta_hilos:
-                                 
+                                 print("Mostrar hilo " + str(opcion)) 
                             elif opcion == 0 :
-                                no_menu21 = False
+                                no_menu21 = False   
+                            else:
+                                print("Selecciona opcion valida.")
                     elif opcion == 2:
+                        print("Escribe 'Cancelar' para cancelar la accion.")
                         titulo_hilo = input("Nombre del hilo: ")
-                        utils.setHilo(name,titulo_hilo,token)
+                        if titulo_hilo != "Cancelar":
+                            utils.setHilo(name,titulo_hilo,token)
                     elif opcion ==3:
                         utils.getHilos()
-                        id_hilo = utils.getNumber(101,utils.cuenta_hilos,"ID Hilo: ")
-                        utils.deleteHilo(id_hilo,token)
+                        print("[100] Cancelar")
+                        id_hilo = utils.getNumber(100,utils.cuenta_hilos,"ID Hilo: ")
+                        if id_hilo != 100:
+                            utils.deleteHilo(id_hilo,token)
                     else:
                         no_menu2 = False
             else:            
@@ -72,16 +78,18 @@ def menu():
         
         elif opcion == 3:
             print("Registrandose como ANONIMO")
-            utils.getHilos()
             no_menu3 = True
             while no_menu3:
+                utils.getHilos()
                 print("[0] Salir")
-                opcion = utils.getNumber(0,utils.cuenta_hilos,"ID Hilo: ")
-                if opcion == 1:
-                    print("Introduzca el ID del hilo: ")                        
+                opcion = utils.getNumber(0,utils.cuenta_hilos,"Opción: ")
+                if opcion >= 101 and opcion < utils.cuenta_hilos:
+                        print("Mostrar hilo " + str(opcion))                  
                 elif opcion == 0:
                     print("Saliendo al menu principal...")
                     no_menu3 = False
+                else:
+                    print("Selecciona opcion valida.")
 
 
 
