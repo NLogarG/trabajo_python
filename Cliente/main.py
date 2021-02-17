@@ -1,65 +1,75 @@
 import utils
 
-token = False
-name = "Anonimo"
+global token
+global name
+global primera_vez
+
 
 def menu():
+    primera_vez = True
+    name = "Anonimo"
     no_menu = True
+    token = False
     while no_menu:
         print("[1] Login")
         print("[2] Crear Cuenta")
         print("[3] Ver hilos")
         print("[0] Salir")
-        opcion = utils.getNumber(0,4,"Opción: ")
+        opcion = utils.getNumber(0, 4, "Opción: ")
         if opcion == 1:
             user = input("Usuario: ")
             passs = input("Contraseña: ")
             token = utils.getToken(user, passs)
             if token != False:
-                name = utils.getName(token)            
+                name = utils.getName(token)
                 no_menu2 = True
                 while no_menu2:
-                    print("Bienvenido " + name)
+                    if primera_vez:
+                        print("Bienvenido " + name)
+                        primera_vez = False
                     maxima = 2
                     print("[1] Ver hilos")
                     if user != "Anonimo":
-                        print("[2] Nuevo hilo")                        
+                        print("[2] Nuevo hilo")
                         maxima = 3
                         if name == "dios":
                             print("[3] Borrar hilo")
                             maxima = 4
                     print("[0] Salir")
-                    opcion = utils.getNumber(0,maxima,"Opción: ")
+                    opcion = utils.getNumber(0, maxima, "Opción: ")
                     if opcion == 1:
                         no_menu21 = True
                         while no_menu21:
                             utils.getHilos()
                             print("[0] Volver")
-                            opcion = utils.getNumber(0,utils.cuenta_hilos,"ID Hilo: ")
+                            opcion = utils.getNumber(
+                                0, utils.cuenta_hilos, "ID Hilo: ")
                             if opcion >= 101 and opcion < utils.cuenta_hilos:
-                                 print("Mostrar hilo " + str(opcion)) 
-                            elif opcion == 0 :
-                                no_menu21 = False   
+                                print("Mostrar hilo " + str(opcion))
+                            elif opcion == 0:
+                                no_menu21 = False
                             else:
                                 print("Selecciona opcion valida.")
                     elif opcion == 2:
                         print("Escribe 'Cancelar' para cancelar la accion.")
                         titulo_hilo = input("Nombre del hilo: ")
                         if titulo_hilo != "Cancelar":
-                            utils.setHilo(name,titulo_hilo,token)
-                    elif opcion ==3:
+                            utils.setHilo(name, titulo_hilo, token)
+                    elif opcion == 3:
                         utils.getHilos()
                         print("[100] Cancelar")
-                        id_hilo = utils.getNumber(100,utils.cuenta_hilos,"ID Hilo: ")
+                        id_hilo = utils.getNumber(
+                            100, utils.cuenta_hilos, "ID Hilo: ")
                         if id_hilo != 100:
-                            utils.deleteHilo(id_hilo,token)
+                            utils.deleteHilo(id_hilo, token)
                     else:
                         no_menu2 = False
-            else:            
+                        primera_vez = True
+                        name = "Anonimo"
+                        token = False
+            else:
                 print("Usuario/Contraseña Incorrectos")
-        
-        
-        
+
         elif opcion == 2:
             no_pass = True
             user = input("Usuario: ")
@@ -72,30 +82,25 @@ def menu():
                     print("Las contraseñas no coinciden")
             name = input("Nombre: ")
             utils.Logon(user, passs, name)
-        
-        
-        
-        
+
         elif opcion == 3:
-            print("Registrandose como ANONIMO")
+            if primera_vez:
+                print("Has entrado como " + name)
+                primera_vez = False
             no_menu3 = True
             while no_menu3:
                 utils.getHilos()
                 print("[0] Salir")
-                opcion = utils.getNumber(0,utils.cuenta_hilos,"Opción: ")
+                opcion = utils.getNumber(0, utils.cuenta_hilos, "Opción: ")
                 if opcion >= 101 and opcion < utils.cuenta_hilos:
-                        print("Mostrar hilo " + str(opcion))                  
+                    print("Mostrar hilo " + str(opcion))
                 elif opcion == 0:
                     print("Saliendo al menu principal...")
                     no_menu3 = False
+                    primera_vez = True
+                    name = "Anonimo"
                 else:
                     print("Selecciona opcion valida.")
-
-
-
-
-
-
 
         elif opcion == 0:
             print("Saliendo...")
