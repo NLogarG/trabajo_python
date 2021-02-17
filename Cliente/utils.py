@@ -4,7 +4,8 @@ import requests
 hilos = []
 cuenta_hilos = 0
 
-def getNumber(min,max,texto):
+
+def getNumber(min, max, texto):
     numeros_bien = True
     opcion = 0
     while numeros_bien:
@@ -17,6 +18,7 @@ def getNumber(min,max,texto):
         except ValueError:
             print("Selecciona opcion valida.")
     return opcion
+
 
 def getToken(user, passs):
     respuesta = []
@@ -51,7 +53,7 @@ def getName(token):
 def Logon(user, passs, name):
     datos_user = {
         'usuario': user,
-        'password': encriptar(passs),     
+        'password': encriptar(passs),
         'name': name
     }
     response = requests.post('http://127.0.0.1:5000/logon', json=datos_user)
@@ -59,6 +61,7 @@ def Logon(user, passs, name):
         print("Usuario registrado")
     else:
         print("Fallo al crear Usuario")
+
 
 def getHilos():
     global cuenta_hilos
@@ -72,23 +75,26 @@ def getHilos():
         for hilo in titulos_hilo.split(','):
             print("["+str(orden)+"] "+hilo)
             hilos.append(hilo)
-            orden +=1
+            orden += 1
         cuenta_hilos = orden
 
-def setHilo(autor_hilo,titulo_hilo,token):
+
+def setHilo(autor_hilo, titulo_hilo, token):
     header = {
         'Content-Type': 'application/json',
         'Authorization': token,
     }
     datos_hilo = {
-        'titulo_hilo': titulo_hilo,  
+        'titulo_hilo': titulo_hilo,
         'autor_hilo': autor_hilo
     }
-    response = requests.post('http://127.0.0.1:5000/hilo', json=datos_hilo,headers=header)
+    response = requests.post('http://127.0.0.1:5000/hilo',
+                             json=datos_hilo, headers=header)
     if response.status_code == 200:
         print("Hilo registrado")
     else:
         print("Fallo al crear hilo")
+
 
 def deleteHilo(id_hilo, token):
     header = {
@@ -98,11 +104,13 @@ def deleteHilo(id_hilo, token):
     datos_hilo = {
         'titulo_hilo': hilos[id_hilo-101],
     }
-    response = requests.delete('http://127.0.0.1:5000/hilo', json=datos_hilo,headers=header)
+    response = requests.delete(
+        'http://127.0.0.1:5000/hilo', json=datos_hilo, headers=header)
     if response.status_code == 200:
         print("Hilo borrado")
     else:
         print("Fallo al borrar Hilo")
+
 
 def encriptar(plain_text):
     encriptado = ""

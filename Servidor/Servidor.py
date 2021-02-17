@@ -18,6 +18,7 @@ db = client.proyecto
 users = []
 hilos = []
 
+
 def auth_required(f):
     @wraps(f)
     def decorated(*args, **kargs):
@@ -45,10 +46,10 @@ def login():
     if isUser and isPass:
         user = request.json['usuario']
         password = request.json['password']
-        if password == getUserPassword(users,user):
+        if password == getUserPassword(users, user):
             token = jwt.encode(
                 {
-                    "user": getUserName(users,user),
+                    "user": getUserName(users, user),
                     "exp": datetime.utcnow() + timedelta(seconds=24 * 3500)
                 },
                 TOKEN_KEY,
@@ -85,12 +86,14 @@ def datos(user):
 def datos_name(user, nombre):
     return jsonify({'datos': nombre}), 200
 
+
 @application.route('/hilos', methods=['GET'])
 def datos_hilos():
     titulos = ""
     for hilo in hilos:
         titulos += hilo.getTitulo() + ","
     return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
+
 
 @application.route('/hilo/<Titulo>', methods=['GET'])
 def datos_hilo():
@@ -99,12 +102,14 @@ def datos_hilo():
         titulos += hilo.getTitulo() + ","
     return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
 
+
 @application.route('/hilo/<Titulo>', methods=['POST'])
 def setComentarioHilo():
     titulos = ""
     for hilo in hilos:
         titulos += hilo.getTitulo() + ","
     return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
+
 
 @application.route('/hilo', methods=['POST'])
 @auth_required
@@ -133,16 +138,19 @@ def deleteHilo(user):
         return jsonify({'RESULTADO': 'Registro completo'}), 200
     return jsonify({'RESULTADO': 'Faltan datos'}), 400
 
+
 @application.errorhandler(401)
 def unauthorized(e):
     return jsonify({'Error': 'No estás autenticado'}), 401
 
+
 def getAllHilos(db):
-    _hilos=[]
+    _hilos = []
     hilos.clear()
     _hilos = db.hilos.find()
     for _hilo in _hilos:
         hilos.append(Hilo(_hilo))
+
 
 def getAllUsers(db):
     _users = []
@@ -151,14 +159,15 @@ def getAllUsers(db):
     for _user in _users:
         users.append(User(_user))
 
-        
+
 def getUserPassword(users, username):
     for user in users:
         if user.getUser() == username:
             return user.getPassword()
     return "vacio"
 
-def getUserName(users,username):
+
+def getUserName(users, username):
     for user in users:
         if user.getUser() == username:
             return user.getName()
@@ -169,5 +178,3 @@ if __name__ == '__main__':
     getAllUsers(db)
     getAllHilos(db)
     application.run(debug=True)
-
-
