@@ -2,7 +2,9 @@ import json
 import requests
 
 hilos = []
+comentarios = []
 cuenta_hilos = 0
+cuenta_comentarios = 0
 
 
 def getNumber(min, max, texto):
@@ -112,16 +114,32 @@ def deleteHilo(id_hilo, token):
         print("Fallo al borrar Hilo")
 
 
-def getComentarios(titulo_hilo):
+def getComentarios(id_hilo):
+    global cuenta_comentarios
+    strcomentarios = ""
+    _comentarios = []
+    comentario = []
     datos_hilo = {
         'titulo_hilo': hilos[id_hilo-101],
     }
     response = requests.get(
-        'http://127.0.0.1:5000/hilo/comentarios', json=datos_hilo, )
+        'http://127.0.0.1:5000/hilo/comentarios', json=datos_hilo)
     if response.status_code == 200:
-        print("Hilo borrado")
+        _comentarios = response.json()
+        strcomentarios = _comentarios["RESULTADO"]
+        orden = 101
+        _comentarios = strcomentarios.split(";")
+        for _comentario in _comentarios:
+            comentario = _comentario.split(",")
+            comentarios.append(comentario)
+            print("["+str(orden)+"] Texto: " + comentario[0] + "\t\t\t\tAutor: "+comentario[1])
+            orden +=1
+    elif response.status_code == 201:
+        respuesta= []
+        respuesta = response.json()
+        print(respuesta["RESULTADO"])
     else:
-        print("Fallo al borrar Hilo")
+        print("Fallo al buscar Comentarios Codigo: "+response.status_code)
 
 
 def encriptar(plain_text):

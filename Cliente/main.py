@@ -41,15 +41,13 @@ def menu():
                         no_menu21 = True
                         while no_menu21:
                             utils.getHilos()
-                            print("[0] Volver")
+                            print("[100] Volver")
                             opcion = utils.getNumber(
-                                0, utils.cuenta_hilos, "ID Hilo: ")
-                            if opcion >= 101 and opcion < utils.cuenta_hilos:
+                                100, utils.cuenta_hilos, "ID Hilo: ")
+                            if opcion >= 101:
                                 print("Mostrar hilo " + str(opcion))
-                            elif opcion == 0:
-                                no_menu21 = False
                             else:
-                                print("Selecciona opcion valida.")
+                                no_menu21 = False
                     elif opcion == 2:
                         print("Escribe 'Cancelar' para cancelar la accion.")
                         titulo_hilo = input("Nombre del hilo: ")
@@ -90,17 +88,22 @@ def menu():
             no_menu3 = True
             while no_menu3:
                 utils.getHilos()
-                print("[0] Salir")
-                opcion = utils.getNumber(0, utils.cuenta_hilos, "Opción: ")
-                if opcion >= 101 and opcion < utils.cuenta_hilos:
-                    print("Mostrar hilo " + str(opcion))
-                elif opcion == 0:
+                print("[100] Salir")
+                opcion = utils.getNumber(100, utils.cuenta_hilos, "Opción: ")
+                if opcion !=100:
+                    no_menu31 = True
+                    while no_menu31:
+                        print("Mostrando hilo " + str(opcion)+": "+utils.hilos[opcion-101])
+                        utils.getComentarios(opcion)
+                        print("[100] Volver")
+                        opcion = utils.getNumber(100,101,"Opción: ")
+                        if opcion == 100:
+                            no_menu31 = False
+                else:
                     print("Saliendo al menu principal...")
                     no_menu3 = False
                     primera_vez = True
                     name = "Anonimo"
-                else:
-                    print("Selecciona opcion valida.")
 
         elif opcion == 0:
             print("Saliendo...")

@@ -95,27 +95,6 @@ def datos_hilos():
     return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
 
 
-@application.route('/hilo/comentarios', methods=['GET'])
-def getComentarioHilo():
-    isHilo = 'titulo_hilo' in request.json
-    if isHilo:
-        for hilo in hilos:
-            if hilo.getTitulo() == request.json["titulo_hilo"]:
-                print("")
-        return jsonify({'RESULTADO': "0"}), 200
-    else:
-        return jsonify({'RESULTADO': 'Faltan datos'}), 400
-
-
-@application.route('/hilo/comentario', methods=['POST'])
-@auth_required
-def setComentarioHilo():
-    titulos = ""
-    for hilo in hilos:
-        titulos += hilo.getTitulo() + ","
-    return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
-
-
 @application.route('/hilo', methods=['POST'])
 @auth_required
 def setHilo(user):
@@ -130,7 +109,6 @@ def setHilo(user):
         return jsonify({'RESULTADO': 'Registro completo'}), 200
     return jsonify({'RESULTADO': 'Faltan datos'}), 400
 
-
 @application.route('/hilo', methods=['DELETE'])
 @auth_required
 def deleteHilo(user):
@@ -144,9 +122,33 @@ def deleteHilo(user):
     return jsonify({'RESULTADO': 'Faltan datos'}), 400
 
 
+@application.route('/hilo/comentarios', methods=['GET'])
+def getComentarioHilo():
+    _comentarios = ""
+    isHilo = 'titulo_hilo' in request.json
+    if isHilo:
+        for hilo in hilos:
+            if hilo.getTitulo() == request.json["titulo_hilo"] and hilo.haveComentarios():
+                for _comentario in hilo.getComentarios():
+                    _comentarios += _comentario[0]+","+_comentario[1]+";"
+                return jsonify({'RESULTADO':  _comentarios[0:len(_comentarios)-1]}), 200
+            return jsonify({'RESULTADO': 'No contiene comentarios'}), 201
+    else:
+        return jsonify({'RESULTADO': 'Faltan datos'}), 400
+
+
+@application.route('/hilo/comentario', methods=['POST'])
+@auth_required
+def setComentarioHilo():
+    titulos = ""
+    for hilo in hilos:
+        titulos += hilo.getTitulo() + ","
+    return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
+
+
 @application.errorhandler(401)
 def unauthorized(e):
-    return jsonify({'Error': 'No estás autenticado'}), 401
+    return jsonify({'Error': 'No estas autenticado'}), 401
 
 
 def getAllHilos(db):
