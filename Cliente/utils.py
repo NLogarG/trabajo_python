@@ -112,6 +112,18 @@ def deleteHilo(id_hilo, token):
         print("Fallo al borrar Hilo")
 
 
+def getComentarios(titulo_hilo):
+    datos_hilo = {
+        'titulo_hilo': hilos[id_hilo-101],
+    }
+    response = requests.get(
+        'http://127.0.0.1:5000/hilo/comentarios', json=datos_hilo, )
+    if response.status_code == 200:
+        print("Hilo borrado")
+    else:
+        print("Fallo al borrar Hilo")
+
+
 def encriptar(plain_text):
     encriptado = ""
     for c in plain_text:

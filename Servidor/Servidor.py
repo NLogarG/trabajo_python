@@ -95,15 +95,20 @@ def datos_hilos():
     return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
 
 
-@application.route('/hilo/<Titulo>', methods=['GET'])
-def datos_hilo():
-    titulos = ""
-    for hilo in hilos:
-        titulos += hilo.getTitulo() + ","
-    return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
+@application.route('/hilo/comentarios', methods=['GET'])
+def getComentarioHilo():
+    isHilo = 'titulo_hilo' in request.json
+    if isHilo:
+        for hilo in hilos:
+            if hilo.getTitulo() == request.json["titulo_hilo"]:
+                print("")
+        return jsonify({'RESULTADO': "0"}), 200
+    else:
+        return jsonify({'RESULTADO': 'Faltan datos'}), 400
 
 
-@application.route('/hilo/<Titulo>', methods=['POST'])
+@application.route('/hilo/comentario', methods=['POST'])
+@auth_required
 def setComentarioHilo():
     titulos = ""
     for hilo in hilos:
