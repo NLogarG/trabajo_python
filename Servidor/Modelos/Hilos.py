@@ -27,7 +27,6 @@ class Hilo:
 
     def getComentarios(self):
         _listacomentarios = []
-        paso = 0
         for _comentario in self.comentarios:
             _listacomentarios.append([_comentario.getTexto(),_comentario.getAutor()])
         return _listacomentarios
