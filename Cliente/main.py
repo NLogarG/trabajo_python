@@ -1,4 +1,5 @@
 import utils
+import os
 
 global token
 global name
@@ -17,6 +18,7 @@ def menu():
         print("[0] Salir")
         opcion = utils.getNumber(0, 4, "Opción: ")
         if opcion == 1:
+            os.system("cls")
             user = input("Usuario: ")
             passs = input("Contraseña: ")
             token = utils.getToken(user, passs)
@@ -25,9 +27,11 @@ def menu():
                 no_menu2 = True
                 while no_menu2:
                     if primera_vez:
+                        os.system("cls")
                         print("Bienvenido " + name)
                         primera_vez = False
                     maxima = 2
+                    os.system("cls")
                     print("[1] Ver hilos")
                     if user != "Anonimo":
                         print("[2] Nuevo hilo")
@@ -45,15 +49,28 @@ def menu():
                             opcion = utils.getNumber(
                                 100, utils.cuenta_hilos, "ID Hilo: ")
                             if opcion >= 101:
-                                print("Mostrar hilo " + str(opcion))
+                                no_menu4 = True
+                                while no_menu4:                                
+                                    os.system("cls")
+                                    print("Mostrando hilo " + str(opcion) +
+                                    ": "+utils.hilos[opcion-101])
+                                    print("COMENTARIOS")
+                                    utils.getComentarios(opcion) 
+                                    print("[100] Volver")
+                                    opcion = utils.getNumber(100, 101, "Opcion: ")      
+                                    if opcion == 100:
+                                        no_menu4 = False
+
                             else:
                                 no_menu21 = False
                     elif opcion == 2:
+                        os.system("cls")
                         print("Escribe 'Cancelar' para cancelar la accion.")
                         titulo_hilo = input("Nombre del hilo: ")
                         if titulo_hilo != "Cancelar":
                             utils.setHilo(name, titulo_hilo, token)
                     elif opcion == 3:
+                        os.system("cls")
                         utils.getHilos()
                         print("[100] Cancelar")
                         id_hilo = utils.getNumber(
@@ -70,6 +87,7 @@ def menu():
 
         elif opcion == 2:
             no_pass = True
+            os.system("cls")
             user = input("Usuario: ")
             while no_pass:
                 passs = input("Contraseña: ")
@@ -77,12 +95,13 @@ def menu():
                 if passs == repass:
                     no_pass = False
                 else:
-                    print("Las contraseñas no coinciden")
+                    print("Las contraseñas no coinciden")                    
             name = input("Nombre: ")
             utils.Logon(user, passs, name)
 
         elif opcion == 3:
             if primera_vez:
+                os.system("cls")
                 print("Has entrado como " + name)
                 primera_vez = False
             no_menu3 = True
@@ -93,20 +112,23 @@ def menu():
                 if opcion != 100:
                     no_menu31 = True
                     while no_menu31:
+                        os.system("cls")
                         print("Mostrando hilo " + str(opcion) +
                               ": "+utils.hilos[opcion-101])
                         utils.getComentarios(opcion)
                         print("[100] Volver")
                         opcion = utils.getNumber(100, 101, "Opción: ")
                         if opcion == 100:
+                            os.system("cls")
                             no_menu31 = False
                 else:
-                    print("Saliendo al menu principal...")
+                    os.system("cls")
                     no_menu3 = False
                     primera_vez = True
                     name = "Anonimo"
 
         elif opcion == 0:
+            os.system("cls")
             print("Saliendo...")
             no_menu = False
 
