@@ -138,14 +138,17 @@ def getComentarioHilo():
         return jsonify({'RESULTADO': 'Faltan datos'}), 400
 
 
-@application.route('/hilo/comentario', methods=['POST'])
+@application.route('/hilo/comentario', methods=['PUT'])
 @auth_required
 def setComentarioHilo():
-    titulos = ""
-    for hilo in hilos:
-        titulos += hilo.getTitulo() + ","
-    return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
-
+    isComentario = "texto_comentario" in request.json
+    isAutorC = "autor_comentario" in request.json
+    isHilo = "titulo_hilo" in request.json
+    isAutorH = "autor_hilo" in request.json
+    if isComentario and isAutorC and isHilo and isAutorH:
+        db.hilos.update({"titulo_hilo":request.json["titulo_hilo"],"autor_hilo":request.json["autor_hilo"]}, {
+                    '$set': {"comentarios.texto_comentario":request.json["texto_comentario"],"comentarios.autor_cometario":request.json["autor_cometario"]}})
+    return jsonify({'RESULTADO': ""}), 200
 
 @application.errorhandler(401)
 def unauthorized(e):

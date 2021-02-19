@@ -2,7 +2,9 @@ import json
 import requests
 
 hilos = []
+autorHilos = []
 comentarios = []
+autorComentarios = []
 cuenta_hilos = 0
 cuenta_comentarios = 0
 
@@ -141,6 +143,25 @@ def getComentarios(id_hilo):
         print(respuesta["RESULTADO"])
     else:
         print("Fallo al buscar Comentarios Codigo: "+response.status_code)
+
+
+def setComentarioHilo(id_hilo,texto_comentario,autor_comentario,token):
+    header = {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+    }
+    datos_hilo = {
+        'titulo_hilo': hilos[id_hilo-101],
+        'autor_hilo' : autorHilos[id_hilo-101],
+        'texto_comentario' : texto_comentario,
+        'autor_comentario' : autor_comentario
+    }
+    response = requests.put(
+        'http://127.0.0.1:5000/hilo/comentarios', json=datos_hilo,headers=header)
+    if response.status_code == 200:
+        print("dabuti")
+    else:
+        print("mal")
 
 
 def encriptar(plain_text):
