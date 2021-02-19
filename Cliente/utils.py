@@ -132,10 +132,11 @@ def getComentarios(id_hilo):
         for _comentario in _comentarios:
             comentario = _comentario.split(",")
             comentarios.append(comentario)
-            print("["+str(orden)+"] Texto: " + comentario[0] + "\t\t\t\tAutor: "+comentario[1])
-            orden +=1
+            print("["+str(orden)+"] Texto: " + comentario[0] +
+                  "\t\t\t\tAutor: "+comentario[1])
+            orden += 1
     elif response.status_code == 201:
-        respuesta= []
+        respuesta = []
         respuesta = response.json()
         print(respuesta["RESULTADO"])
     else:

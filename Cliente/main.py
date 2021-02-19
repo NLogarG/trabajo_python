@@ -90,13 +90,14 @@ def menu():
                 utils.getHilos()
                 print("[100] Salir")
                 opcion = utils.getNumber(100, utils.cuenta_hilos, "Opción: ")
-                if opcion !=100:
+                if opcion != 100:
                     no_menu31 = True
                     while no_menu31:
-                        print("Mostrando hilo " + str(opcion)+": "+utils.hilos[opcion-101])
+                        print("Mostrando hilo " + str(opcion) +
+                              ": "+utils.hilos[opcion-101])
                         utils.getComentarios(opcion)
                         print("[100] Volver")
-                        opcion = utils.getNumber(100,101,"Opción: ")
+                        opcion = utils.getNumber(100, 101, "Opción: ")
                         if opcion == 100:
                             no_menu31 = False
                 else:

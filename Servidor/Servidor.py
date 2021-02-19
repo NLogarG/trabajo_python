@@ -109,6 +109,7 @@ def setHilo(user):
         return jsonify({'RESULTADO': 'Registro completo'}), 200
     return jsonify({'RESULTADO': 'Faltan datos'}), 400
 
+
 @application.route('/hilo', methods=['DELETE'])
 @auth_required
 def deleteHilo(user):
