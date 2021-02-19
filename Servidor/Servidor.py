@@ -90,9 +90,11 @@ def datos_name(user, nombre):
 @application.route('/hilos', methods=['GET'])
 def datos_hilos():
     titulos = ""
+    autores =""
     for hilo in hilos:
         titulos += hilo.getTitulo() + ","
-    return jsonify({'RESULTADO': titulos[0:len(titulos)-1]}), 200
+        autores += hilo.getAutor() + ","
+    return jsonify({'Hilos': titulos[0:len(titulos)-1],'Autores':autores[0:len(autores)-1]}), 200
 
 
 @application.route('/hilo', methods=['POST'])
@@ -138,17 +140,20 @@ def getComentarioHilo():
         return jsonify({'RESULTADO': 'Faltan datos'}), 400
 
 
-@application.route('/hilo/comentario', methods=['PUT'])
+@application.route('/hilo/comentarios', methods=['PUT'])
 @auth_required
-def setComentarioHilo():
+def setComentarioHilo(user):
     isComentario = "texto_comentario" in request.json
     isAutorC = "autor_comentario" in request.json
     isHilo = "titulo_hilo" in request.json
     isAutorH = "autor_hilo" in request.json
     if isComentario and isAutorC and isHilo and isAutorH:
-        db.hilos.update({"titulo_hilo":request.json["titulo_hilo"],"autor_hilo":request.json["autor_hilo"]}, {
-                    '$set': {"comentarios.texto_comentario":request.json["texto_comentario"],"comentarios.autor_cometario":request.json["autor_cometario"]}})
-    return jsonify({'RESULTADO': ""}), 200
+        db.hilos.update_one({"titulo_hilo":request.json["titulo_hilo"],"autor_hilo":request.json["autor_hilo"]}, {
+                    '$push': {"comentarios": { "texto_comentario" : request.json["texto_comentario"], "autor_comentario" : request.json["autor_comentario"]}}})
+        getAllHilos(db)
+        return jsonify({'RESULTADO': "Bien"}), 200
+    else: 
+        return jsonify({'RESULTADO': 'Faltan datos'}), 400
 
 @application.errorhandler(401)
 def unauthorized(e):

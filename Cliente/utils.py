@@ -73,13 +73,16 @@ def getHilos():
     response = requests.get('http://127.0.0.1:5000/hilos')
     if response.status_code == 200:
         _hilos = response.json()
-        titulos_hilo = str(_hilos['RESULTADO'])
+        titulos_hilo = str(_hilos['Hilos'])
+        autores_hilo = str(_hilos['Autores'])
         orden = 101
         hilos.clear
         for hilo in titulos_hilo.split(','):
             print("["+str(orden)+"] "+hilo)
             hilos.append(hilo)
             orden += 1
+        for hilo in autores_hilo.split(','):
+            autorHilos.append(hilo)
         cuenta_hilos = orden
 
 
@@ -159,9 +162,7 @@ def setComentarioHilo(id_hilo,texto_comentario,autor_comentario,token):
     response = requests.put(
         'http://127.0.0.1:5000/hilo/comentarios', json=datos_hilo,headers=header)
     if response.status_code == 200:
-        print("dabuti")
-    else:
-        print("mal")
+        print("Comentario añadido.")
 
 
 def encriptar(plain_text):

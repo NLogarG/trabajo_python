@@ -44,25 +44,34 @@ def menu():
                     if opcion == 1:
                         no_menu21 = True
                         while no_menu21:
+                            os.system("cls")
                             utils.getHilos()
                             print("[100] Volver")
                             opcion = utils.getNumber(
                                 100, utils.cuenta_hilos, "ID Hilo: ")
                             if opcion >= 101:
                                 no_menu4 = True
-                                while no_menu4:                                
+                                while no_menu4:
                                     os.system("cls")
                                     print("Mostrando hilo " + str(opcion) +
-                                    ": "+utils.hilos[opcion-101])
+                                          ": "+utils.hilos[opcion-101])
                                     print("COMENTARIOS")
-                                    utils.getComentarios(opcion) 
+                                    utils.getComentarios(opcion)
+                                    if (name != "Anonimo"):
+                                        print("[99] Añadir comentario")
                                     print("[100] Volver")
-                                    opcion = utils.getNumber(100, 101, "Opcion: ")      
-                                    if opcion == 100:
+                                    opcion2 = utils.getNumber(
+                                        99, 101, "Opcion: ")
+                                    if opcion2 == 100:
                                         no_menu4 = False
+                                        os.system("cls")
+                                    elif opcion2 == 99:
+                                        texto_comentario = input("Texto del comentario: ")
+                                        utils.setComentarioHilo(opcion,texto_comentario,name,token)
 
                             else:
                                 no_menu21 = False
+                                os.system("cls")
                     elif opcion == 2:
                         os.system("cls")
                         print("Escribe 'Cancelar' para cancelar la accion.")
@@ -79,6 +88,7 @@ def menu():
                             utils.deleteHilo(id_hilo, token)
                     else:
                         no_menu2 = False
+                        os.system("cls")
                         primera_vez = True
                         name = "Anonimo"
                         token = False
@@ -95,7 +105,7 @@ def menu():
                 if passs == repass:
                     no_pass = False
                 else:
-                    print("Las contraseñas no coinciden")                    
+                    print("Las contraseñas no coinciden")
             name = input("Nombre: ")
             utils.Logon(user, passs, name)
 

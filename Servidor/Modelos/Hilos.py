@@ -22,6 +22,9 @@ class Hilo:
     def getTitulo(self):
         return self.titulo_hilo
 
+    def getAutor(self):
+        return self.autor_hilo
+
     def haveComentarios(self):
         return self.tienecoments
 
