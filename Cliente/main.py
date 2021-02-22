@@ -57,17 +57,22 @@ def menu():
                                           ": "+utils.hilos[opcion-101])
                                     print("COMENTARIOS")
                                     utils.getComentarios(opcion)
+                                    if (name == "dios"):
+                                        print("[98] Borrar comentario")
                                     if (name != "Anonimo"):
                                         print("[99] Añadir comentario")
                                     print("[100] Volver")
                                     opcion2 = utils.getNumber(
-                                        99, 101, "Opcion: ")
+                                        98, 101, "Opcion: ")
                                     if opcion2 == 100:
                                         no_menu4 = False
                                         os.system("cls")
                                     elif opcion2 == 99:
                                         texto_comentario = input("Texto del comentario: ")
                                         utils.setComentarioHilo(opcion,texto_comentario,name,token)
+                                    elif opcion2 == 98:
+                                        Id_hilo = utils.getNumber(100,105,"Id hilo: ")
+                                        utils.deleteComentarioHilo(opcion,Id_hilo,token)
 
                             else:
                                 no_menu21 = False

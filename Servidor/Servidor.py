@@ -155,6 +155,21 @@ def setComentarioHilo(user):
     else: 
         return jsonify({'RESULTADO': 'Faltan datos'}), 400
 
+@application.route('/hilo/comentarios', methods=['DELETE'])
+@auth_required
+def deleteComentarioHilo(user):
+    isComentario = "texto_comentario" in request.json
+    isAutorC = "autor_comentario" in request.json
+    isHilo = "titulo_hilo" in request.json
+    isAutorH = "autor_hilo" in request.json
+    if isComentario and isAutorC and isHilo and isAutorH:
+        db.hilos.update_one({"titulo_hilo":request.json["titulo_hilo"],"autor_hilo":request.json["autor_hilo"]}, {
+                    '$pull': {"comentarios": { "texto_comentario" : request.json["texto_comentario"], "autor_comentario" : request.json["autor_comentario"]}}},False,True)
+        getAllHilos(db)
+        return jsonify({'RESULTADO': "Bien"}), 200
+    else: 
+        return jsonify({'RESULTADO': 'Faltan datos'}), 400
+
 @application.errorhandler(401)
 def unauthorized(e):
     return jsonify({'Error': 'No estas autenticado'}), 401

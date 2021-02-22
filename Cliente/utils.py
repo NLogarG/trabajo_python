@@ -136,7 +136,8 @@ def getComentarios(id_hilo):
         _comentarios = strcomentarios.split(";")
         for _comentario in _comentarios:
             comentario = _comentario.split(",")
-            comentarios.append(comentario)
+            comentarios.append(comentario[0])
+            autorComentarios.append(comentario[1])
             print("["+str(orden)+"] Texto: " + comentario[0] +
                   "\t\t\t\tAutor: "+comentario[1])
             orden += 1
@@ -163,6 +164,22 @@ def setComentarioHilo(id_hilo,texto_comentario,autor_comentario,token):
         'http://127.0.0.1:5000/hilo/comentarios', json=datos_hilo,headers=header)
     if response.status_code == 200:
         print("Comentario añadido.")
+
+def deleteComentarioHilo(id_hilo,id_comentario,token):
+    header = {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+    }
+    datos_hilo = {
+        'titulo_hilo': hilos[id_hilo-101],
+        'autor_hilo' : autorHilos[id_hilo-101],
+        'texto_comentario' : comentarios[id_comentario-101],
+        'autor_comentario' : autorComentarios[id_comentario-101]
+    }
+    response = requests.delete(
+        'http://127.0.0.1:5000/hilo/comentarios', json=datos_hilo,headers=header)
+    if response.status_code == 200:
+        print("Comentario borrado.")
 
 
 def encriptar(plain_text):
