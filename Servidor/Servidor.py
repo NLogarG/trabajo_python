@@ -6,6 +6,7 @@ from Modelos.Usuarios import User
 from Modelos.Hilos import Hilo
 from pymongo import MongoClient
 from datetime import datetime, timedelta
+from bson.objectid import ObjectId
 from functools import wraps
 application = Flask(__name__)
 
@@ -49,6 +50,7 @@ def login():
         if password == getUserPassword(users, user):
             token = jwt.encode(
                 {
+                    
                     "user": getUserName(users, user),
                     "exp": datetime.utcnow() + timedelta(seconds=24 * 3500)
                 },
@@ -127,6 +129,7 @@ def deleteHilo(user):
 
 @application.route('/hilo/comentarios', methods=['GET'])
 def getComentarioHilo():
+
     _comentarios = ""
     isHilo = 'titulo_hilo' in request.json
     if isHilo:

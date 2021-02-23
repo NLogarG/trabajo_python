@@ -11,11 +11,12 @@ def menu():
     name = "Anonimo"
     no_menu = True
     token = False
+    os.system("cls")
     while no_menu:
         print("||**********************||")
         print("||    MENU PRINCIPAL    ||")
         print("||                      ||")
-        print("||     [1] Login        ||")
+        print("||      [1] Login       ||")
         print("||   [2] Crear Cuenta   ||")
         print("||    [3] Ver hilos     ||")
         print("||      [0] Salir       ||")
