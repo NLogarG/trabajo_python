@@ -13,6 +13,7 @@ def menu():
     token = False
     while no_menu:
         print("||**********************||")
+        print("||    MENU PRINCIPAL    ||")
         print("||                      ||")
         print("||     [1] Login        ||")
         print("||   [2] Crear Cuenta   ||")
@@ -23,6 +24,7 @@ def menu():
         opcion = utils.getNumber(0, 4, "Opción: ")
         if opcion == 1:
             os.system("cls")
+            print("{### FORMULARIO LOGEO ###}")
             user = input("Usuario: ")
             passs = input("Contraseña: ")
             token = utils.getToken(user, passs)
@@ -37,6 +39,8 @@ def menu():
                     maxima = 2
                     os.system("cls")
                     print("||**********************||")
+                    print("||        LOGEADO       ||")
+                    print("||                      ||")
                     print("||    [1] Ver hilos     ||")
                     if user != "Anonimo":
                         print("||    [2] Nuevo hilo    ||")                        
@@ -45,6 +49,7 @@ def menu():
                             print("||    [3] Borrar hilo   ||")                            
                             maxima = 4
                     print("||       [0] Salir      ||")
+                    print("||                      ||")
                     print("||**********************||")
                     opcion = utils.getNumber(0, maxima, "Opción: ")
                     if opcion == 1:
@@ -61,31 +66,37 @@ def menu():
                                     os.system("cls")
                                     print("Mostrando hilo " + str(opcion) +
                                           ": "+utils.hilos[opcion-101])
-                                    print("COMENTARIOS")
+                                    print("||************************||")
+                                    print("||          HILOS         ||")
+                                    print("||                        ||")
                                     utils.getComentarios(opcion)
                                     if (name == "dios"):
-                                        print("[98] Borrar comentario")
+                                        print("|| [98] Borrar comentario ||")                                        
                                     if (name != "Anonimo"):
-                                        print("[99] Añadir comentario")
-                                    print("[100] Volver")
+                                        print("|| [99] Añadir comentario ||")                                        
+                                    print("||       [100] Volver     ||")
+                                    print("||                        ||")
+                                    print("||************************||")
                                     opcion2 = utils.getNumber(
                                         98, 101, "Opcion: ")
                                     if opcion2 == 100:
                                         no_menu4 = False
                                         os.system("cls")
                                     elif opcion2 == 99:
+                                        print("{### NUEVO COMENTARIO ###}")
                                         texto_comentario = input("Texto del comentario: ")
                                         utils.setComentarioHilo(opcion,texto_comentario,name,token)
                                     elif opcion2 == 98:
+                                        print("{### BORRAR COMENTARIO ###}")
                                         Id_hilo = utils.getNumber(100,105,"Id hilo: ")
                                         utils.deleteComentarioHilo(opcion,Id_hilo,token)
-
                             else:
                                 no_menu21 = False
                                 os.system("cls")
                     elif opcion == 2:
                         os.system("cls")
                         print("Escribe 'Cancelar' para cancelar la accion.")
+                        print("{### NUEVO HILO ###}")
                         titulo_hilo = input("Nombre del hilo: ")
                         if titulo_hilo != "Cancelar":
                             utils.setHilo(name, titulo_hilo, token)
