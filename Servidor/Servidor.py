@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, abort
-import json
+import os
 import jwt
-import time
+import hashlib
 from Modelos.Usuarios import User
 from Modelos.Hilos import Hilo
 from pymongo import MongoClient
@@ -28,7 +28,8 @@ def auth_required(f):
             try:
                 data = jwt.decode(token, TOKEN_KEY, algorithms=["HS256"])
                 user = data['user']
-                return f(user, *args, **kargs)
+                id = data['_id']
+                return f(user,id, *args, **kargs)
             except:
                 abort(401)
         abort(401)
@@ -47,17 +48,23 @@ def login():
     if isUser and isPass:
         user = request.json['usuario']
         password = request.json['password']
-        if password == getUserPassword(users, user):
-            token = jwt.encode(
-                {
-                    
-                    "user": getUserName(users, user),
-                    "exp": datetime.utcnow() + timedelta(seconds=24 * 3500)
-                },
-                TOKEN_KEY,
-                algorithm="HS256")
-            return jsonify({'RESULTADO': token}), 200
-        return jsonify({'RESULTADO': 'Login incorrecto'}), 400
+        usuario = []
+        usuario = db.usuarios.find_one({
+            "user":user
+        })
+        if usuario is not None:
+            password_hash = hashlib.sha512(password.encode('utf-8') + usuario['salt']).hexdigest()
+            if usuario['password'] == password_hash:
+                token = jwt.encode(
+                    {
+                        "_id": str(ObjectId(usuario['_id'])),
+                        "user": getUserName(users, user),
+                        "exp": datetime.utcnow() + timedelta(seconds=24 * 3500)
+                    },
+                    TOKEN_KEY,
+                    algorithm="HS256")
+                return jsonify({'RESULTADO': token}), 200
+        return jsonify({'RESULTADO': 'Login incorrecto'}), 403
     return jsonify({'RESULTADO': 'Faltan datos'}), 400
 
 
@@ -67,10 +74,14 @@ def logon():
     isPass = 'password' in request.json
     isName = 'name' in request.json
     if isUser and isPass and isName:
+        password = request.json['usuario']
+        salt = os.urandom(16)
+        password_hash = hashlib.sha512(password.encode('utf-8') + salt).hexdigest()
         db.usuarios.insert_one({
             "user": request.json['usuario'],
-            "password": request.json['password'],
-            "name": request.json['name']
+            "password": password_hash,
+            "name": request.json['name'],
+            "salt" : salt
         })
         getAllUsers(db)
         return jsonify({'RESULTADO': 'Registro completo'}), 200
@@ -83,10 +94,10 @@ def datos(user):
     return jsonify({'datos': user}), 200
 
 
-@application.route('/datos/<nombre>', methods=['GET'])
+@application.route('/datosId', methods=['GET'])
 @auth_required
-def datos_name(user, nombre):
-    return jsonify({'datos': nombre}), 200
+def datos_name(user, id):
+    return jsonify({'datos': id}), 200
 
 
 @application.route('/hilos', methods=['GET'])

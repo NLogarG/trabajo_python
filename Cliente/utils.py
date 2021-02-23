@@ -57,7 +57,7 @@ def getName(token):
 def Logon(user, passs, name):
     datos_user = {
         'usuario': user,
-        'password': encriptar(passs),
+        'password': passs,
         'name': name
     }
     response = requests.post('http://127.0.0.1:5000/logon', json=datos_user)
