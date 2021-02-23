@@ -12,10 +12,14 @@ def menu():
     no_menu = True
     token = False
     while no_menu:
-        print("[1] Login")
-        print("[2] Crear Cuenta")
-        print("[3] Ver hilos")
-        print("[0] Salir")
+        print("||**********************||")
+        print("||                      ||")
+        print("||     [1] Login        ||")
+        print("||   [2] Crear Cuenta   ||")
+        print("||    [3] Ver hilos     ||")
+        print("||      [0] Salir       ||")
+        print("||                      ||")
+        print("||**********************||")
         opcion = utils.getNumber(0, 4, "Opción: ")
         if opcion == 1:
             os.system("cls")
@@ -32,14 +36,16 @@ def menu():
                         primera_vez = False
                     maxima = 2
                     os.system("cls")
-                    print("[1] Ver hilos")
+                    print("||**********************||")
+                    print("||    [1] Ver hilos     ||")
                     if user != "Anonimo":
-                        print("[2] Nuevo hilo")
+                        print("||    [2] Nuevo hilo    ||")                        
                         maxima = 3
                         if name == "dios":
-                            print("[3] Borrar hilo")
+                            print("||    [3] Borrar hilo   ||")                            
                             maxima = 4
-                    print("[0] Salir")
+                    print("||       [0] Salir      ||")
+                    print("||**********************||")
                     opcion = utils.getNumber(0, maxima, "Opción: ")
                     if opcion == 1:
                         no_menu21 = True
