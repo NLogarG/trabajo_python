@@ -75,21 +75,18 @@ def menu():
                                     os.system("cls")
                                     print("Mostrando hilo " + str(opcion) +
                                           ": "+utils.hilos[opcion-101])
-                                    print("  ___________________________________________________________________________  ") 
-                                    print("||                                                                           ||")
-                                    print("||                                HILOS                                      ||")
-                                    print("||                                                                           ||")
+                                    print("  _______________________________________________________________________________  ") 
+                                    print("||\t\t\t\t\t\t\t\t\t\t||")
+                                    print("||\t\t\t\t\tHILOS\t\t\t\t\t||")                                
                                     utils.getComentarios(opcion)
                                     if (name == "dios"):
-                                        print("||                                                                           ||")
-                                        print("||                       [98] Borrar comentario                              ||")                                                                               
+                                        print("||\t\t\t\t[98] Borrar comentario\t\t\t\t||")                                                                                                                       
                                     if (name != "Anonimo"):
-                                        print("||                                                                           ||")
-                                        print("||                       [99] Añadir comentario                              ||")
-                                        print("||                                                                           ||")                                         
-                                    print("||                             [100] Volver                                  ||")
-                                    print("||                                                                           ||") 
-                                    print("||___________________________________________________________________________||")
+                                        print("||\t\t\t\t[99] Añadir comentario\t\t\t\t||")                                         
+                                        print("||\t\t\t\t\t\t\t\t\t\t||")                                         
+                                    print("||\t\t\t\t[100] Volver\t\t\t\t\t||")
+                                    print("||\t\t\t\t\t\t\t\t\t\t||") 
+                                    print("||______________________________________________________________________________||")
                                     opcion2 = utils.getNumber(
                                         98, 101, "Opcion: ")
                                     if opcion2 == 100:
