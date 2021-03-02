@@ -13,7 +13,7 @@ def menu():
     token = False
     os.system("cls")
     while no_menu:
-        print("  RECORDAR KEYRING  ")
+        print("     RECORDAR KEYRING")
         print("  ______________________  ")
         print("||                      ||")
         print("||    MENU PRINCIPAL    ||")
