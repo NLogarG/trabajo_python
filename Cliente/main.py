@@ -67,17 +67,20 @@ def menu():
                                     os.system("cls")
                                     print("Mostrando hilo " + str(opcion) +
                                           ": "+utils.hilos[opcion-101])
-                                    print("||************************||")
-                                    print("||          HILOS         ||")
-                                    print("||                        ||")
+                                    print("  _______________________________________________________________________  ") 
+                                    print("||                                                                       ||")
+                                    print("||                                HILOS                                  ||")
+                                    print("||                                                                       ||")
                                     utils.getComentarios(opcion)
                                     if (name == "dios"):
-                                        print("|| [98] Borrar comentario ||")                                        
+                                        print("||                       [98] Borrar comentario                          ||")
+                                        print("||                                                                       ||")                                        
                                     if (name != "Anonimo"):
-                                        print("|| [99] Añadir comentario ||")                                        
-                                    print("||       [100] Volver     ||")
-                                    print("||                        ||")
-                                    print("||************************||")
+                                        print("||                       [99] Añadir comentario                          ||")
+                                        print("||                                                                       ||")                                         
+                                    print("||                             [100] Volver                              ||")
+                                    print("||                                                                       ||") 
+                                    print("||_______________________________________________________________________||")
                                     opcion2 = utils.getNumber(
                                         98, 101, "Opcion: ")
                                     if opcion2 == 100:
@@ -164,6 +167,4 @@ def menu():
             os.system("cls")
             print("Saliendo...")
             no_menu = False
-
-
 menu()

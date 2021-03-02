@@ -113,7 +113,7 @@ def datos_hilos():
 
 @application.route('/hilo', methods=['POST'])
 @auth_required
-def setHilo(user):
+def setHilo(user, id):
     isTitulo = 'titulo_hilo' in request.json
     isAutor = 'autor_hilo' in request.json
     if isTitulo and isAutor:
@@ -128,7 +128,7 @@ def setHilo(user):
 
 @application.route('/hilo', methods=['DELETE'])
 @auth_required
-def deleteHilo(user):
+def deleteHilo(user, id):
     isTitulo = 'titulo_hilo' in request.json
     if isTitulo:
         db.hilos.delete_one({
@@ -157,7 +157,7 @@ def getComentarioHilo():
 
 @application.route('/hilo/comentarios', methods=['PUT'])
 @auth_required
-def setComentarioHilo(user):
+def setComentarioHilo(user, id):
     isComentario = "texto_comentario" in request.json
     isAutorC = "autor_comentario" in request.json
     isHilo = "titulo_hilo" in request.json
@@ -172,7 +172,7 @@ def setComentarioHilo(user):
 
 @application.route('/hilo/comentarios', methods=['DELETE'])
 @auth_required
-def deleteComentarioHilo(user):
+def deleteComentarioHilo(user, id):
     isComentario = "texto_comentario" in request.json
     isAutorC = "autor_comentario" in request.json
     isHilo = "titulo_hilo" in request.json
