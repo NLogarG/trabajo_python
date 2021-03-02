@@ -78,7 +78,7 @@ def getHilos():
         orden = 101
         hilos.clear
         for hilo in titulos_hilo.split(','):
-            print("||["+str(orden)+"] "+hilo+"||")
+            print("|| ["+str(orden)+"] "+hilo  +"             ||")
             hilos.append(hilo)
             orden += 1
         for hilo in autores_hilo.split(','):
@@ -138,8 +138,8 @@ def getComentarios(id_hilo):
             comentario = _comentario.split(",")
             comentarios.append(comentario[0])
             autorComentarios.append(comentario[1])
-            print("["+str(orden)+"] Texto: " + comentario[0] +
-                  "\t\t\t\tAutor: "+comentario[1])
+            print("|| ["+str(orden)+"] Texto: " + comentario[0] +
+                  "\t\t\t\tAutor: "+comentario[1] + "  ||")
             orden += 1
     elif response.status_code == 201:
         respuesta = []
