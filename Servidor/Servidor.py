@@ -54,6 +54,7 @@ def login():
         })
         if usuario is not None:
             password_hash = hashlib.sha512(password.encode('utf-8') + usuario['salt']).hexdigest()
+            print(password_hash)
             if usuario['password'] == password_hash:
                 token = jwt.encode(
                     {
@@ -74,7 +75,7 @@ def logon():
     isPass = 'password' in request.json
     isName = 'name' in request.json
     if isUser and isPass and isName:
-        password = request.json['usuario']
+        password = request.json['password']
         salt = os.urandom(16)
         password_hash = hashlib.sha512(password.encode('utf-8') + salt).hexdigest()
         db.usuarios.insert_one({
@@ -90,7 +91,7 @@ def logon():
 
 @application.route('/datos', methods=['GET'])
 @auth_required
-def datos(user):
+def datos(user,id):
     return jsonify({'datos': user}), 200
 
 
