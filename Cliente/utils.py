@@ -78,7 +78,7 @@ def getHilos():
         orden = 101
         hilos.clear
         for hilo in titulos_hilo.split(','):
-            print("["+str(orden)+"] "+hilo)
+            print("||["+str(orden)+"] "+hilo+"||")
             hilos.append(hilo)
             orden += 1
         for hilo in autores_hilo.split(','):
