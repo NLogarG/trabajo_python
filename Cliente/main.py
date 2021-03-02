@@ -37,6 +37,7 @@ def menu():
                 while no_menu2:
                     if primera_vez:
                         os.system("cls")
+                        
                         print("Bienvenido " + name)
                         primera_vez = False
                     maxima = 2

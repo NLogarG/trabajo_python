@@ -1,5 +1,6 @@
 import json
 import requests
+import keyring
 
 hilos = []
 autorHilos = []
@@ -30,6 +31,7 @@ def getToken(user, passs):
         'usuario': user,
         'password': passs,
     }
+    #keyring.set_password("Foro Python", user, passs)
     response = requests.post('http://127.0.0.1:5000/login', json=datos_user)
     if response.status_code == 200:
         respuesta = response.json()
