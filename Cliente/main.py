@@ -13,7 +13,8 @@ def menu():
     token = False
     os.system("cls")
     while no_menu:
-        print("||**********************||")
+        print("  ______________________  ")
+        print("||                      ||")
         print("||    MENU PRINCIPAL    ||")
         print("||                      ||")
         print("||      [1] Login       ||")
@@ -21,7 +22,7 @@ def menu():
         print("||    [3] Ver hilos     ||")
         print("||      [0] Salir       ||")
         print("||                      ||")
-        print("||**********************||")
+        print("||______________________||")
         opcion = utils.getNumber(0, 4, "Opción: ")
         if opcion == 1:
             os.system("cls")
@@ -39,7 +40,8 @@ def menu():
                         primera_vez = False
                     maxima = 2
                     os.system("cls")
-                    print("||**********************||")
+                    print("  ______________________  ")
+                    print("||                      ||")
                     print("||        LOGEADO       ||")
                     print("||                      ||")
                     print("||    [1] Ver hilos     ||")
@@ -51,14 +53,18 @@ def menu():
                             maxima = 4
                     print("||       [0] Salir      ||")
                     print("||                      ||")
-                    print("||**********************||")
+                    print("||______________________||")
                     opcion = utils.getNumber(0, maxima, "Opción: ")
                     if opcion == 1:
                         no_menu21 = True
                         while no_menu21:
                             os.system("cls")
+                            print("  __________________________  ")
+                            print("||                          ||")
+                            print("||   SELECCIONA EL HILO     ||")
                             utils.getHilos()
-                            print("[100] Volver")
+                            print("|| [100] Volver             ||")
+                            print("||__________________________||")
                             opcion = utils.getNumber(
                                 100, utils.cuenta_hilos, "ID Hilo: ")
                             if opcion >= 101:
@@ -67,20 +73,21 @@ def menu():
                                     os.system("cls")
                                     print("Mostrando hilo " + str(opcion) +
                                           ": "+utils.hilos[opcion-101])
-                                    print("  _______________________________________________________________________  ") 
-                                    print("||                                                                       ||")
-                                    print("||                                HILOS                                  ||")
-                                    print("||                                                                       ||")
+                                    print("  ___________________________________________________________________________  ") 
+                                    print("||                                                                           ||")
+                                    print("||                                HILOS                                      ||")
+                                    print("||                                                                           ||")
                                     utils.getComentarios(opcion)
                                     if (name == "dios"):
-                                        print("||                       [98] Borrar comentario                          ||")
-                                        print("||                                                                       ||")                                        
+                                        print("||                                                                           ||")
+                                        print("||                       [98] Borrar comentario                              ||")                                                                               
                                     if (name != "Anonimo"):
-                                        print("||                       [99] Añadir comentario                          ||")
-                                        print("||                                                                       ||")                                         
-                                    print("||                             [100] Volver                              ||")
-                                    print("||                                                                       ||") 
-                                    print("||_______________________________________________________________________||")
+                                        print("||                                                                           ||")
+                                        print("||                       [99] Añadir comentario                              ||")
+                                        print("||                                                                           ||")                                         
+                                    print("||                             [100] Volver                                  ||")
+                                    print("||                                                                           ||") 
+                                    print("||___________________________________________________________________________||")
                                     opcion2 = utils.getNumber(
                                         98, 101, "Opcion: ")
                                     if opcion2 == 100:
@@ -100,7 +107,7 @@ def menu():
                     elif opcion == 2:
                         os.system("cls")
                         print("Escribe 'Cancelar' para cancelar la accion.")
-                        print("{### NUEVO HILO ###}")
+                        print("{########~NUEVO HILO~########}")
                         titulo_hilo = input("Nombre del hilo: ")
                         if titulo_hilo != "Cancelar":
                             utils.setHilo(name, titulo_hilo, token)
