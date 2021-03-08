@@ -80,18 +80,18 @@ def getHilos():
         orden = 101
         hilos.clear
         for hilo in titulos_hilo.split(','):
-            tabulaciones = "\t\t\t\t\t\t"
-            if len(hilo[0]) <= 8:
+            tabulaciones = "\t\t\t\t\t"
+            if len(hilo) <= 8:
+                tabulaciones = "\t\t\t\t\t"
+            elif len(hilo) <= 16:
                 tabulaciones = "\t\t\t\t"
-            elif len(hilo[0]) <= 16:
-                tabulaciones = "\t\t\t"
-            else
+            else:
                 tabulaciones="\t\t"
-            print("|| ["+str(orden)+"] "+hilo+"\t||")
+            print("|| ["+str(orden)+"] " + hilo + tabulaciones + "||")
             hilos.append(hilo)
             orden += 1
         for hilo in autores_hilo.split(','):
-            autorHilos.append(hilo)S
+            autorHilos.append(hilo)
         cuenta_hilos = orden
 
 

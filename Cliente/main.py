@@ -61,12 +61,13 @@ def menu():
                         no_menu21 = True
                         while no_menu21:
                             os.system("cls")
-                            print("  __________________________  ")
-                            print("||                          ||")
-                            print("||   SELECCIONA EL HILO     ||")
+                            print("  ______________________________________________  ")
+                            print("||\t\t\t\t\t\t||")
+                            print("||\t\tSELECCIONA EL HILO\t\t||")
                             utils.getHilos()
-                            print("|| [100] Volver             ||")
-                            print("||__________________________||")
+                            print("||\t\t[100] Volver\t\t\t||")
+                            print("||\t\t\t\t\t\t||")
+                            print("||______________________________________________||")
                             opcion = utils.getNumber(
                                 100, utils.cuenta_hilos, "ID Hilo: ")
                             if opcion >= 101:
@@ -145,11 +146,16 @@ def menu():
             if primera_vez:
                 os.system("cls")
                 print("Has entrado como " + name)
+                print("  ______________________________________________  ")
+                print("||\t\t\t\t\t\t||")
+                print("||\t\tSELECCIONA EL HILO\t\t||")
                 primera_vez = False
             no_menu3 = True
             while no_menu3:
                 utils.getHilos()
-                print("[100] Salir")
+                print("||\t\t\t\t\t\t||")
+                print("||\t\t[100] Volver\t\t\t||")
+                print("||______________________________________________||")
                 opcion = utils.getNumber(100, utils.cuenta_hilos, "Opción: ")
                 if opcion != 100:
                     no_menu31 = True
