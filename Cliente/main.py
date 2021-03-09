@@ -113,8 +113,15 @@ def menu():
                             utils.setHilo(name, titulo_hilo, token)
                     elif opcion == 3:
                         os.system("cls")
+                        print("  ______________________________________________  ")
+                        print("||\t\t\t\t\t\t||")
+                        print("||\t\tSELECCIONA EL HILO\t\t||")
                         utils.getHilos()
-                        print("[100] Cancelar")
+                        print("||\t\t\t\t\t\t||")
+                        print("||\t\t[100] Volver\t\t\t||")
+                        print("||\t\t\t\t\t\t||")
+                        print("||______________________________________________||")
+                       
                         id_hilo = utils.getNumber(
                             100, utils.cuenta_hilos, "ID Hilo: ")
                         if id_hilo != 100:
@@ -131,6 +138,7 @@ def menu():
         elif opcion == 2:
             no_pass = True
             os.system("cls")
+            print("{### FORMULARIO REGISTRO ###}")
             user = input("Usuario: ")
             while no_pass:
                 passs = input("Contraseña: ")
@@ -160,11 +168,17 @@ def menu():
                 if opcion != 100:
                     no_menu31 = True
                     while no_menu31:
-                        os.system("cls")
+                        os.system("cls")                        
                         print("Mostrando hilo " + str(opcion) +
                               ": "+utils.hilos[opcion-101])
+                        print("  _______________________________________________________________________________  ") 
+                        print("||\t\t\t\t\t\t\t\t\t\t||")
+                        print("||\t\t\t\t\tHILOS\t\t\t\t\t||")      
                         utils.getComentarios(opcion)
-                        print("[100] Volver")
+                        print("||\t\t\t\t\t\t\t\t\t\t||") 
+                        print("||\t\t\t\t[100] Volver\t\t\t\t\t||")
+                        print("||\t\t\t\t\t\t\t\t\t\t||")
+                        print("||______________________________________________________________________________||")                        
                         opcion = utils.getNumber(100, 101, "Opción: ")
                         if opcion == 100:
                             os.system("cls")
