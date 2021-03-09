@@ -149,7 +149,7 @@ def getComentarios(id_hilo):
             autorComentarios.append(comentario[1])
             tabulaciones = "\t\t\t\t\t\t"
             if len(comentario[0]) <= 16:
-                tabulaciones = "\t\t\t\t\t"
+                tabulaciones = "\t\t\t\t\t\t"
             elif len(comentario[0]) <= 24:
                 tabulaciones = "\t\t\t\t"
             else:
