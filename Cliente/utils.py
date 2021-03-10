@@ -93,6 +93,8 @@ def getHilos():
         for hilo in autores_hilo.split(','):
             autorHilos.append(hilo)
         cuenta_hilos = orden
+        if cuenta_hilos == 0:
+            cuenta_hilos = 101
 
 
 def setHilo(autor_hilo, titulo_hilo, token):
@@ -157,10 +159,13 @@ def getComentarios(id_hilo):
             print("|| ["+str(orden)+"] Texto: " + comentario[0] +
                   tabulaciones + "Autor: " +comentario[1] + "\t||")
             orden += 1
+        cuenta_comentarios = orden
+        if cuenta_comentarios == 0:
+            cuenta_comentarios = 101
     elif response.status_code == 201:
         respuesta = []
         respuesta = response.json()
-        print(respuesta["RESULTADO"])
+        print("||\t\t\t\t"+respuesta["RESULTADO"]+"\t\t\t\t||")
     else:
         print("Fallo al buscar Comentarios Codigo: "+response.status_code)
 
@@ -189,8 +194,8 @@ def deleteComentarioHilo(id_hilo,id_comentario,token):
     datos_hilo = {
         'titulo_hilo': hilos[id_hilo-101],
         'autor_hilo' : autorHilos[id_hilo-101],
-        'texto_comentario' : comentarios[id_comentario-101],
-        'autor_comentario' : autorComentarios[id_comentario-101]
+        'texto_comentario' : comentarios[id_comentario-100],
+        'autor_comentario' : autorComentarios[id_comentario-100]
     }
     response = requests.delete(
         'http://127.0.0.1:5000/hilo/comentarios', json=datos_hilo,headers=header)

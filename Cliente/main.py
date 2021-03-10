@@ -99,8 +99,8 @@ def menu():
                                         utils.setComentarioHilo(opcion,texto_comentario,name,token)
                                     elif opcion2 == 98:
                                         print("{### BORRAR COMENTARIO ###}")
-                                        Id_hilo = utils.getNumber(100,105,"Id hilo: ")
-                                        utils.deleteComentarioHilo(opcion,Id_hilo,token)
+                                        Id_comentario = utils.getNumber(100,utils.cuenta_comentarios,"Id Comentario: ")
+                                        utils.deleteComentarioHilo(opcion,Id_comentario,token)
                             else:
                                 no_menu21 = False
                                 os.system("cls")
@@ -154,12 +154,12 @@ def menu():
             if primera_vez:
                 os.system("cls")
                 print("Has entrado como " + name)
-                print("  ______________________________________________  ")
-                print("||\t\t\t\t\t\t||")
-                print("||\t\tSELECCIONA EL HILO\t\t||")
                 primera_vez = False
             no_menu3 = True
             while no_menu3:
+                print("  ______________________________________________  ")
+                print("||\t\t\t\t\t\t||")
+                print("||\t\tSELECCIONA EL HILO\t\t||")
                 utils.getHilos()
                 print("||\t\t\t\t\t\t||")
                 print("||\t\t[100] Volver\t\t\t||")
