@@ -13,7 +13,6 @@ def menu():
     token = False
     os.system("cls")
     while no_menu:
-        print("     RECORDAR KEYRING")
         print("  ______________________  ")
         print("||                      ||")
         print("||    MENU PRINCIPAL    ||")
@@ -29,9 +28,13 @@ def menu():
             os.system("cls")
             print("{### FORMULARIO LOGEO ###}")
             user = input("Usuario: ")
-            passs = input("Contraseña: ")
+            passs = utils.keyAlmacenada(0,user,"")
+            if passs == None:
+                passs = input("Contraseña: ")
             token = utils.getToken(user, passs)
             if token != False:
+                if utils.keyAlmacenada(0,user,"") == None:
+                    utils.keyAlmacenada(0,user,passs)
                 name = utils.getName(token)
                 no_menu2 = True
                 while no_menu2:

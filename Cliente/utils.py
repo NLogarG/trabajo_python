@@ -1,4 +1,5 @@
 import json
+from logging import raiseExceptions
 import requests
 import keyring
 
@@ -31,7 +32,6 @@ def getToken(user, passs):
         'usuario': user,
         'password': passs,
     }
-    #keyring.set_password("Foro Python", user, passs)
     response = requests.post('http://127.0.0.1:5000/login', json=datos_user)
     if response.status_code == 200:
         respuesta = response.json()
@@ -201,6 +201,21 @@ def deleteComentarioHilo(id_hilo,id_comentario,token):
         'http://127.0.0.1:5000/hilo/comentarios', json=datos_hilo,headers=header)
     if response.status_code == 200:
         print("Comentario borrado.")
+
+def keyAlmacenada(estado,nombre,contraseña):
+    if estado == 0:
+        if keyring.get_password("Foro Python",nombre) != None:
+            print("¿Deseas iniciar sesion automaticamente?\n[0] No\t[1] Si")
+            numero = getNumber(0,2,"Opcion: ")
+            if numero == 1:
+                return keyring.get_password("Foro Python",nombre)
+        return None
+    elif estado == 1:
+        print("¿Deseas guardar las credenciales?\n[0] No\t[1] Si")
+        numero = getNumber(0,2,"Opcion: ")
+        if numero == 1:
+            keyring.set_password("Foro Python",nombre,contraseña)
+            print("Credenciales guardadas.")
 
 
 def encriptar(plain_text):
