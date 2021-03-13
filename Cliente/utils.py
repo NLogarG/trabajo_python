@@ -80,13 +80,19 @@ def getHilos():
         orden = 101
         hilos.clear
         for hilo in titulos_hilo.split(','):
-            tabulaciones = "\t\t\t\t\t"
-            if len(hilo) <= 8:
+            tabulaciones = ""
+            if len(hilo) <= 7:
                 tabulaciones = "\t\t\t\t\t"
-            elif len(hilo) <= 16:
+            elif len(hilo) <= 15:
                 tabulaciones = "\t\t\t\t"
+            elif len(hilo) <= 23:
+                tabulaciones = "\t\t\t"
+            elif len(hilo) <= 31:
+                tabulaciones = "\t\t"
+            elif len(hilo) <= 39:
+                tabulaciones = "\t"
             else:
-                tabulaciones="\t\t"
+                tabulaciones = ""
             print("|| ["+str(orden)+"] " + hilo + tabulaciones + "||")
             hilos.append(hilo)
             orden += 1
@@ -149,13 +155,21 @@ def getComentarios(id_hilo):
             comentario = _comentario.split(",")
             comentarios.append(comentario[0])
             autorComentarios.append(comentario[1])
-            tabulaciones = "\t\t\t\t\t\t"
-            if len(comentario[0]) <= 16:
+            tabulaciones = ""
+            if len(comentario[0]) <= 7:
                 tabulaciones = "\t\t\t\t\t\t"
-            elif len(comentario[0]) <= 24:
+            elif len(comentario[0]) <= 15:
+                tabulaciones = "\t\t\t\t\t"
+            elif len(comentario[0]) <= 23:
                 tabulaciones = "\t\t\t\t"
-            else:
+            elif len(comentario[0]) <= 31:
                 tabulaciones = "\t\t\t"
+            elif len(comentario[0]) <= 39:
+                tabulaciones = "\t\t"
+            elif len(comentario[0]) <= 47:
+                tabulaciones = "\t"
+            else:
+                tabulaciones = ""
             print("|| ["+str(orden)+"] Texto: " + comentario[0] +
                   tabulaciones + "Autor: " +comentario[1] + "\t||")
             orden += 1

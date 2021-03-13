@@ -29,18 +29,19 @@ def menu():
             print("{### FORMULARIO LOGEO ###}")
             user = input("Usuario: ")
             passs = utils.keyAlmacenada(0,user,"")
+            no_guardado = False
             if passs == None:
+                no_guardado = True
                 passs = input("Contraseña: ")
             token = utils.getToken(user, passs)
             if token != False:
-                if utils.keyAlmacenada(0,user,"") == None:
-                    utils.keyAlmacenada(0,user,passs)
+                if no_guardado:
+                    utils.keyAlmacenada(1,user,passs)
                 name = utils.getName(token)
                 no_menu2 = True
                 while no_menu2:
                     if primera_vez:
                         os.system("cls")
-                        
                         print("Bienvenido " + name)
                         primera_vez = False
                     maxima = 2
@@ -87,7 +88,7 @@ def menu():
                                         print("||\t\t\t\t[98] Borrar comentario\t\t\t\t||")                                                                                                                       
                                     if (name != "Anonimo"):
                                         print("||\t\t\t\t[99] Añadir comentario\t\t\t\t||")                                         
-                                        print("||\t\t\t\t\t\t\t\t\t\t||")                                         
+                                    print("||\t\t\t\t\t\t\t\t\t\t||")                                         
                                     print("||\t\t\t\t[100] Volver\t\t\t\t\t||")
                                     print("||\t\t\t\t\t\t\t\t\t\t||") 
                                     print("||______________________________________________________________________________||")
@@ -116,7 +117,7 @@ def menu():
                             utils.setHilo(name, titulo_hilo, token)
                     elif opcion == 3:
                         os.system("cls")
-                        print("  ______________________________________________  ")
+                        print("  ______________________________________________")
                         print("||\t\t\t\t\t\t||")
                         print("||\t\tSELECCIONA EL HILO\t\t||")
                         utils.getHilos()
